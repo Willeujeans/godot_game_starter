@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://qdmjo2riuwfu"]
+
+[ext_resource type="Script" path="res://managers/scene_manager/scene_manager.gd" id="1_cibkn"]
+[ext_resource type="PackedScene" uid="uid://cp4edyje2jl8r" path="res://user_interfaces/main_menu/main_menu.tscn" id="2_47n50"]
+[ext_resource type="PackedScene" uid="uid://dl2n6ub0catbi" path="res://user_interfaces/pause_menu/pause_menu.tscn" id="3_m6082"]
+[ext_resource type="PackedScene" uid="uid://2eu1nrarx4ce" path="res://user_interfaces/transition/transition.tscn" id="4_27ctb"]
+
+[node name="SceneManager" type="Node" groups=["scene_manager"]]
+script = ExtResource("1_cibkn")
+main_menu_scene = ExtResource("2_47n50")
+pause_menu_scene = ExtResource("3_m6082")
+transition_scene = ExtResource("4_27ctb")
+
+[node name="UIContainer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="ChildContainer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="TempStorage" type="Node2D" parent="."]
