@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://y5xw0k1drmsd"]
+
+[ext_resource type="Theme" uid="uid://bj1as4ca50bb0" path="res://themes/main_theme.tres" id="1_rfyhj"]
+[ext_resource type="Script" path="res://menus/saves_menu/saves_menu.gd" id="2_rpmqw"]
+
+[node name="SavesMenu" type="VBoxContainer"]
+offset_right = 3840.0
+offset_bottom = 2160.0
+theme = ExtResource("1_rfyhj")
+script = ExtResource("2_rpmqw")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "saves"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "save00 | time: 12:04:34"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 2
+text = "save00 | time: 12:04:34"
