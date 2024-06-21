@@ -4,12 +4,12 @@ extends Node
 const SAVE_PATH: String = "user://saves/"
 var current_save_path: String
 var current_storage: Storage
+var list_of_saves: Array
 
 func _ready():
 	if !Engine.is_editor_hint():
 		check_for_save_folder()
 		check_for_saves()
-		set_current_save(0)
 
 
 # getters
@@ -33,13 +33,32 @@ func get_files_in_folder(path: String)->Array:
 
 
 # setters
-func set_current_save(number: int):
-	print("save_data_manager | setting current save [" + str(number) + "]")
-	current_save_path = SAVE_PATH + "save" + str(number) + ".tres"
+func set_current_save(key: String):
+	print("save_data_manager | setting current save [" + key + "]")
+	current_save_path = SAVE_PATH + "save" + key + ".tres"
 
 
 func set_current_storage(new_storage: Storage):
 	current_storage = new_storage
+
+
+func delete_n_save(key: String):
+	DirAccess.remove_absolute(SAVE_PATH + "save" + key + ".tres")
+	check_for_saves()
+
+
+func delete_all_saves():
+	for each in get_files_in_folder(SAVE_PATH):
+		DirAccess.remove_absolute(each)
+
+
+func generate_random_key(key_size: int = 16, starting_character: String = "")-> String:
+	var characters: String = "0123456789abcdefghijklmnopqrstuvwxyz"
+	var key: String = starting_character
+	var n_char: int = len(characters)
+	for i in range(key_size):
+		key += characters[randi()% n_char]
+	return key
 
 
 func check_for_save_folder():
@@ -53,25 +72,24 @@ func check_for_save_folder():
 
 
 func check_for_saves():
-	var list_of_saves: Array = get_files_in_folder(SAVE_PATH)
-	if list_of_saves.is_empty():
-		print("save_data_manager | checking for save files [false]")
-		create_new_save()
-	else:
-		print("save_data_manager | checking for save files [true]")
-		set_current_save(0)
-		set_current_storage(ResourceLoader.load(current_save_path))
+	list_of_saves = get_files_in_folder(SAVE_PATH)
 
 
-func create_new_save():
-	var save_number: int = get_files_in_folder(SAVE_PATH).size()
-	print("save_data_manager | creating new save [" + str(save_number) + "]")	
-	set_current_save(save_number)
+func create_new_save(save_key: String = generate_random_key(4)):
+	for each in list_of_saves:
+		if save_key == ResourceLoader.load(each).get_data("save_key"):
+			return ""
+
+	print("save_data_manager | creating new save [" + save_key + "]")	
+	set_current_save(save_key)
 	var new_storage = Storage.new()
+	new_storage.add_data("save_key", save_key)
 	ResourceSaver.save(new_storage, current_save_path)
 	set_current_storage(new_storage)
-	add_to_save("save_number", save_number)
-	print("save_data_manager | created save file.")	
+	print("save_data_manager | created save file [ " + current_save_path + " ]")	
+	check_for_saves()
+	return save_key
+
 
 func add_to_save(key: String, value):
 	current_storage.add_data(key, value)
@@ -97,7 +115,6 @@ func save_current_game():
 	save_all_nodes()
 	write_save_to_disc()
 	print("save_data_manager | saved game.")
-	
 
 
 func load_current_save():
@@ -109,6 +126,6 @@ func load_current_save():
 
 func delete_save_node_data(key: String):
 	if Engine.is_editor_hint():
-		print("save_data_manager | deleting data from <"+key+">")
+		print("save_data_manager | deleting data from <" + key + ">")
 		current_storage.erase(key)
 		print("save_data_manager | deleted data.")

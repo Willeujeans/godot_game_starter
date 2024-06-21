@@ -12,9 +12,5 @@ func unpause():
 	queue_free()
 
 
-func _on_exit_button_pressed():
-	get_tree().quit()
-
-
 func _on_options_button_pressed():
 	call_deferred("add_child", options_menu_scene.instantiate())

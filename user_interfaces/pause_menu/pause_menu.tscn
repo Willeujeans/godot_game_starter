@@ -1,97 +1,70 @@
-[gd_scene load_steps=6 format=3 uid="uid://dl2n6ub0catbi"]
+[gd_scene load_steps=7 format=3 uid="uid://dl2n6ub0catbi"]
 
 [ext_resource type="Script" path="res://user_interfaces/pause_menu/pause_menu.gd" id="1_51lgn"]
-[ext_resource type="PackedScene" uid="uid://c63cussnwbd6v" path="res://user_interfaces/fullscreen_button/fullscreen_button.tscn" id="3_1qlgm"]
-[ext_resource type="Shader" path="res://user_interfaces/pause_menu/blurry.gdshader" id="3_h7d3a"]
+[ext_resource type="PackedScene" uid="uid://c63cussnwbd6v" path="res://user_interfaces/pause_menu/fullscreen_button/fullscreen_button.tscn" id="3_1qlgm"]
+[ext_resource type="PackedScene" uid="uid://conep5qqj8fla" path="res://user_interfaces/pause_menu/vhs_blur.tscn" id="3_6cshi"]
+[ext_resource type="PackedScene" uid="uid://47g5hag5uxhq" path="res://user_interfaces/pause_menu/audio_slider/audio_slider.tscn" id="3_itu5c"]
 [ext_resource type="Theme" uid="uid://bj1as4ca50bb0" path="res://user_interfaces/assets/main_theme.tres" id="3_qdep1"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_x2kv7"]
-shader = ExtResource("3_h7d3a")
-shader_parameter/res = Vector2(240, 135)
-shader_parameter/mask_type = 1
-shader_parameter/bloom_type = 0
-shader_parameter/hardScan = -12.0
-shader_parameter/hardPix = -2.0
-shader_parameter/hardBloomScan = -2.0
-shader_parameter/hardBloomPix = -1.5
-shader_parameter/bloomAmount = 16.0
-shader_parameter/warp = Vector2(240, 135)
-shader_parameter/maskDark = 0.5
-shader_parameter/maskLight = 1.5
+[ext_resource type="PackedScene" uid="uid://8pgiuptawewa" path="res://user_interfaces/pause_menu/exit_button/exit_button.tscn" id="4_kn2qr"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 2
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 1
 theme = ExtResource("3_qdep1")
 script = ExtResource("1_51lgn")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 0
-offset_right = 864.0
-offset_bottom = 2403.0
+[node name="settings" type="CanvasLayer" parent="."]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-z_index = 2
-layout_mode = 2
-theme_override_constants/separation = 100
-
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "paused"
-
-[node name="MainSlider" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/MainSlider"]
-layout_mode = 2
-text = "main"
-
-[node name="HSlider" type="HSlider" parent="CenterContainer/VBoxContainer/MainSlider"]
-layout_mode = 2
-
-[node name="EffectsSlider" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/EffectsSlider"]
-layout_mode = 2
-text = "effects"
-
-[node name="HSlider" type="HSlider" parent="CenterContainer/VBoxContainer/EffectsSlider"]
-layout_mode = 2
-
-[node name="MusicSlider" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/MusicSlider"]
-layout_mode = 2
-text = "music"
-
-[node name="HSlider" type="HSlider" parent="CenterContainer/VBoxContainer/MusicSlider"]
-layout_mode = 2
-
-[node name="FullScreen" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="FullscreenButton" parent="CenterContainer/VBoxContainer/FullScreen" instance=ExtResource("3_1qlgm")]
-layout_mode = 2
-
-[node name="ExitButton" type="Button" parent="CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = "exit game"
-
-[node name="BlurryRectangle" type="ColorRect" parent="."]
-top_level = true
-z_index = 1
-material = SubResource("ShaderMaterial_x2kv7")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+[node name="VBoxContainer" type="VBoxContainer" parent="settings"]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -181.5
+offset_right = 181.5
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme = ExtResource("3_qdep1")
+theme_override_constants/separation = 30
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[node name="Label" type="Label" parent="settings/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 90
+text = "paused"
+
+[node name="Master" parent="settings/VBoxContainer" instance=ExtResource("3_itu5c")]
+layout_mode = 2
+bus_name = "Master"
+
+[node name="Music" parent="settings/VBoxContainer" instance=ExtResource("3_itu5c")]
+layout_mode = 2
+bus_name = "Music"
+
+[node name="Effects" parent="settings/VBoxContainer" instance=ExtResource("3_itu5c")]
+layout_mode = 2
+bus_name = "Effects"
+
+[node name="FullscreenButton" parent="settings/VBoxContainer" instance=ExtResource("3_1qlgm")]
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="settings/VBoxContainer"]
+layout_mode = 2
+text = "save settings"
+
+[node name="ExitButton" parent="settings/VBoxContainer" instance=ExtResource("4_kn2qr")]
+layout_mode = 2
+
+[node name="VhsBlur" parent="." instance=ExtResource("3_6cshi")]

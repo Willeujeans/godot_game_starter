@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://conep5qqj8fla"]
+
+[ext_resource type="Shader" path="res://user_interfaces/pause_menu/blurry.gdshader" id="1_teag8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x2kv7"]
+shader = ExtResource("1_teag8")
+shader_parameter/res = Vector2(240, 135)
+shader_parameter/mask_type = 1
+shader_parameter/bloom_type = 0
+shader_parameter/hardScan = -12.0
+shader_parameter/hardPix = -2.0
+shader_parameter/hardBloomScan = -2.0
+shader_parameter/hardBloomPix = -1.5
+shader_parameter/bloomAmount = 16.0
+shader_parameter/warp = Vector2(240, 135)
+shader_parameter/maskDark = 0.5
+shader_parameter/maskLight = 1.5
+
+[node name="VhsBlur" type="CanvasLayer"]
+layer = 0
+follow_viewport_enabled = true
+
+[node name="BlurEffect" type="ColorRect" parent="."]
+top_level = true
+z_index = 1
+material = SubResource("ShaderMaterial_x2kv7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
