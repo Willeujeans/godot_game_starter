@@ -4,14 +4,8 @@ extends Node
 @export var pause_menu_scene: PackedScene
 @export var transition_scene: PackedScene
 
-
 func _ready():
 	change_scene(main_menu_scene.instantiate(), false)
-
-
-func _process(delta):
-	if Input.is_action_just_pressed("pause"):
-		pause()
 
 
 func clear_children_UIContainer():
@@ -57,7 +51,3 @@ func overlay_ui(new_scene_instance):
 	clear_children_UIContainer()
 	$UIContainer.call_deferred("add_child", new_scene_instance)
 
-
-func pause():
-	overlay_ui(pause_menu_scene.instantiate())
-	get_tree().paused = true

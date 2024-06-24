@@ -79,8 +79,8 @@ func load_saved_variables():
 	if !save_active and !Engine.is_editor_hint():
 		return
 	if display_text: print("save_node<" + unique_key.left(3) + "> | loading data...")	
-	if SaveDataManager.get_data(id):
-		var loaded_data = SaveDataManager.get_data(id)
+	if SaveManager.get_data(id):
+		var loaded_data = SaveManager.get_data(id)
 		for each in loaded_data:
 			var variable_name = each.get("name")
 			var variable_value = each.get("value")
@@ -108,4 +108,4 @@ func get_saved_variables():
 
 func delete_stored_data():
 	if id:
-		SaveDataManager.delete_save_node_data(id)
+		SaveManager.delete_save_node_data(id)

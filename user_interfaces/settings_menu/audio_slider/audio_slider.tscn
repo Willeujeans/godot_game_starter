@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://47g5hag5uxhq"]
 
 [ext_resource type="Theme" uid="uid://bj1as4ca50bb0" path="res://user_interfaces/assets/main_theme.tres" id="1_ctc1p"]
-[ext_resource type="Script" path="res://user_interfaces/pause_menu/audio_slider/audio_slider.gd" id="2_3filf"]
+[ext_resource type="Script" path="res://user_interfaces/settings_menu/audio_slider/audio_slider.gd" id="2_3filf"]
 
 [node name="AudioSlider" type="VBoxContainer"]
 theme = ExtResource("1_ctc1p")

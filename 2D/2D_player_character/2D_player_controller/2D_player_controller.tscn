@@ -1,22 +1,70 @@
-[gd_scene load_steps=6 format=3 uid="uid://bl5tcm37qwdfs"]
+[gd_scene load_steps=15 format=3 uid="uid://bl5tcm37qwdfs"]
 
 [ext_resource type="Script" path="res://2D/2D_player_character/2D_player_controller/2D_player_controller.gd" id="1_haqfs"]
-[ext_resource type="Texture2D" uid="uid://b611gfprjqntb" path="res://icon.svg" id="2_f057q"]
+[ext_resource type="Texture2D" uid="uid://cuxqin847i0l6" path="res://2D/2D_player_character/idle_animation/000.png" id="2_0pk6i"]
+[ext_resource type="Texture2D" uid="uid://dx5y1cd7mpqhl" path="res://2D/2D_player_character/idle_animation/001.png" id="3_04oux"]
 [ext_resource type="PackedScene" uid="uid://7rox1r8mmpri" path="res://2D/2D_player_character/2D_player_camera/2D_player_camera.tscn" id="3_m6n3h"]
+[ext_resource type="Texture2D" uid="uid://cgfao62keqflq" path="res://2D/2D_player_character/idle_animation/002.png" id="4_du13y"]
+[ext_resource type="Texture2D" uid="uid://b63cthcby0143" path="res://2D/2D_player_character/idle_animation/003.png" id="5_1o35p"]
+[ext_resource type="Texture2D" uid="uid://c3evpxp2kygj1" path="res://2D/2D_player_character/idle_animation/004.png" id="6_r063g"]
+[ext_resource type="Texture2D" uid="uid://dt1phqdkyu5t8" path="res://2D/2D_player_character/move_animation/000.png" id="7_01xla"]
+[ext_resource type="Texture2D" uid="uid://fujwmsb5xcd2" path="res://2D/2D_player_character/move_animation/001.png" id="8_fejr3"]
+[ext_resource type="Texture2D" uid="uid://qecq11oqhjiu" path="res://2D/2D_player_character/move_animation/002.png" id="9_fehcf"]
+[ext_resource type="Texture2D" uid="uid://k06pw80b8ptk" path="res://2D/2D_player_character/move_animation/003.png" id="10_ar41k"]
+[ext_resource type="Script" path="res://2D/2D_player_character/2D_player_controller/action_handler.gd" id="12_nvq0l"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nlbk3"]
-radius = 58.0
-height = 126.0
+radius = 40.0
+height = 100.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x35y7"]
 animations = [{
+"frames": [],
+"loop": true,
+"name": &"crouch",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_f057q")
+"texture": ExtResource("2_0pk6i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_04oux")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_du13y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_1o35p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_r063g")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"jump",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_01xla")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_fejr3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_fehcf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ar41k")
+}],
+"loop": true,
+"name": &"move",
+"speed": 2.0
 }]
 
 [node name="PlayerBody" type="CharacterBody2D"]
@@ -27,6 +75,20 @@ z_index = 1
 shape = SubResource("CapsuleShape2D_nlbk3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_x35y7")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.147379
 
 [node name="PlayerCamera" parent="." instance=ExtResource("3_m6n3h")]
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+
+[node name="ActionHandler" type="Node" parent="."]
+script = ExtResource("12_nvq0l")
+
+[node name="Throw" type="Node" parent="ActionHandler"]
+
+[node name="Explode" type="Node" parent="ActionHandler"]

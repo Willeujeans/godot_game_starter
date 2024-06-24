@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://yn8ut0d4en"
-path="res://.godot/imported/fullscreen_white.svg-c3ad0330bf56b98428ea9f19de3ef497.ctex"
+path="res://.godot/imported/fullscreen_white.svg-407bcfbb61e792c0d957970c60d12e38.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://user_interfaces/pause_menu/fullscreen_button/fullscreen_white.svg"
-dest_files=["res://.godot/imported/fullscreen_white.svg-c3ad0330bf56b98428ea9f19de3ef497.ctex"]
+source_file="res://user_interfaces/settings_menu/fullscreen_button/fullscreen_white.svg"
+dest_files=["res://.godot/imported/fullscreen_white.svg-407bcfbb61e792c0d957970c60d12e38.ctex"]
 
 [params]
 

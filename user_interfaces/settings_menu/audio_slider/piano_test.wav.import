@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dniot7m0u50xi"
-path="res://.godot/imported/piano_test.wav-87db2ab300c8fb57abb871a14d581ea7.sample"
+path="res://.godot/imported/piano_test.wav-d7db1da5877cd9384e3a0360dfc09edc.sample"
 
 [deps]
 
-source_file="res://user_interfaces/pause_menu/audio_slider/piano_test.wav"
-dest_files=["res://.godot/imported/piano_test.wav-87db2ab300c8fb57abb871a14d581ea7.sample"]
+source_file="res://user_interfaces/settings_menu/audio_slider/piano_test.wav"
+dest_files=["res://.godot/imported/piano_test.wav-d7db1da5877cd9384e3a0360dfc09edc.sample"]
 
 [params]
 

@@ -6,6 +6,7 @@ var current_save_path: String
 var current_storage: Storage
 var list_of_saves: Array
 
+
 func _ready():
 	if !Engine.is_editor_hint():
 		check_for_save_folder()
