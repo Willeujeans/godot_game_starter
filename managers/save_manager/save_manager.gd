@@ -77,9 +77,11 @@ func check_for_saves():
 
 
 func create_new_save(save_key: String = generate_random_key(4)):
-	for each in list_of_saves:
-		if save_key == ResourceLoader.load(each).get_data("save_key"):
-			return ""
+	check_for_saves()
+	if !list_of_saves.is_empty():
+		for each in list_of_saves:
+			if save_key == ResourceLoader.load(each).get_data("save_key"):
+				return ""
 
 	print("save_data_manager | creating new save [" + save_key + "]")	
 	set_current_save(save_key)

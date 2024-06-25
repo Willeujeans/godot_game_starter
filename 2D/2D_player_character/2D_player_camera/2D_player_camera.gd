@@ -1,7 +1,6 @@
 extends Camera2D
 
 @export var smoothing = 5.0
-
 @export var stops_at_ceiling: bool = true
 
 func _ready():
@@ -23,6 +22,8 @@ func _ready():
 
 
 func findByClass(node: Node, className : String, result : Array) -> void:
+	if !node:
+		return
 	if node.is_class(className):
 		result.push_back(node)
 	for child in node.get_children():

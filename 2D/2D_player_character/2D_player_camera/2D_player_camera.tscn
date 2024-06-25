@@ -6,4 +6,5 @@
 position = Vector2(0, -276)
 limit_smoothed = true
 position_smoothing_enabled = true
+drag_vertical_enabled = true
 script = ExtResource("1_wbf5m")

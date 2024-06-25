@@ -6,6 +6,8 @@ func _ready():
 	$Label.set_text(bus_name)
 	var audio_settings = ConfigHandler.load_audio_settings()
 	var loaded_value = audio_settings.get(bus_name + "_volume")
+	if !loaded_value:
+		return
 	change_audio(loaded_value)
 	$Slider.value = loaded_value
 
